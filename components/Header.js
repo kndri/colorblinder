@@ -1,8 +1,16 @@
-import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { scale } from '../utilities';
 
-const Header = ({ fontSize }) => (
+const styles = StyleSheet.create({
+  header: {
+    color: '#ecf0f1',
+    fontFamily: 'dogbyte',
+  },
+});
+
+export const Header = ({ fontSize }) => (
   <View style={{ flexDirection: 'row' }}>
     <Text style={[styles.header, { color: '#E64C3C', fontSize }]}>c</Text>
     <Text style={[styles.header, { color: '#E57E31', fontSize }]}>o</Text>
@@ -11,21 +19,12 @@ const Header = ({ fontSize }) => (
     <Text style={[styles.header, { color: '#3998DB', fontSize }]}>r</Text>
     <Text style={[styles.header, { fontSize }]}>blinder</Text>
   </View>
-)
-
-const styles = StyleSheet.create({
-  header: {
-    color: '#ecf0f1',
-    fontFamily: 'dogbyte'
-  }
-})
+);
 
 Header.propTypes = {
-  fontSize: PropTypes.number
-}
+  fontSize: PropTypes.number,
+};
 
 Header.defaultProps = {
-  fontSize: 55
-}
-
-export { Header }
+  fontSize: scale(45),
+};
