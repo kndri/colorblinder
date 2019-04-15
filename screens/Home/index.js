@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Audio } from "expo";
 import { Header } from "../../components";
+import { retrieveData } from '../../utilities';
 import styles from "./styles";
 
 export default class Home extends Component {
   state = {
-    isSoundOn: true
+    isSoundOn: true,
+    highScore: 0
   };
 
   async componentWillMount() {
     this.backgroundMusic = new Audio.Sound();
     this.buttonFX = new Audio.Sound();
+    retrieveData('highScore').then(val => this.setState({ highScore: val }));
     try {
       await this.backgroundMusic.loadAsync(
         require("../../assets/music/Komiku_Mushrooms.mp3")
@@ -58,13 +61,13 @@ export default class Home extends Component {
           <Text style={styles.play}>PLAY!</Text>
         </TouchableOpacity>
         <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 80 }}
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
         >
           <Image
             source={require("../../assets/icons/trophy.png")}
             style={styles.trophyIcon}
           />
-          <Text style={styles.hiscore}>Hi-score: 0</Text>
+          <Text style={styles.hiscore}>Hi-score: {this.state.highScore}</Text>
         </View>
         <TouchableOpacity
           onPress={this.onLeaderboardPress}
@@ -85,7 +88,7 @@ export default class Home extends Component {
               SFX: SubspaceAudio
             </Text>
             <Text style={[styles.copyrightText, { color: "#3998DB" }]}>
-              Development: Kouame N'Dri
+              Development: RisingStack
             </Text>
           </View>
           <View style={{ flex: 1 }} />
